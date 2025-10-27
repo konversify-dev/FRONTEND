@@ -4,28 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root {
-  --color-primary-darkest: #1E1E1E;
-  --color-primary-dark: #685F5F;
-  --color-primary-light: #FB8300;
-  --color-secondary: #9F9F9F;
-  --color-secondary-light: #FFFFFF;
-
-  --color-btn-primary: #1262BE;
-  --color-btn-success: #22C813;
-  --color-btn-pending: #FADD00;
-  --color-btn-contacted: #407BFF;
-  --color-btn-failed: #E41E1E;
-  --color-btn-danger: #D91515;
-  --color-btn-save: #1E9826;
-  --color-btn-disabled: #9CAFC8;
-  --color-btn-dark: #122786;
-  --color-btn-light: #FFFAFA;
-
-  --font-lato: "Lato", sans-serif;
-  --font-montserrat: "Montserrat", sans-serif;
-}
-
 header {
   position: sticky;
   left: 0;
