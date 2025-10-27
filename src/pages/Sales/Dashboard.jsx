@@ -1,7 +1,14 @@
 import React from "react";
 import Navbar from "../../components/layout/Navbar.jsx";
 import Button from "../../components/utils/Button";
-import Header from "../../components/layout/Header.jsx"; // 🔹 import baru
+import Header from "../../components/layout/Header.jsx"; 
+import SummaryCard from "../../components/layout/SummaryCard.jsx";
+
+// Import ikon lokal
+import usersIcon from "../../assets/sales/users.png";
+import chartIcon from "../../assets/sales/chart.png";
+import phoneIcon from "../../assets/sales/phone.png";
+import handshakeIcon from "../../assets/sales/handshake.png";
 
 export default function Dashboard() {
   const handleAddLead = () => {
@@ -40,6 +47,34 @@ export default function Dashboard() {
               onClick={handleAddLead}
             />
           </div>
+        </div>
+
+        {/* 🔸 Summary Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <SummaryCard
+            title="Total Leads"
+            value="1,248"
+            iconSrc={usersIcon}
+            altText="Users Icon"
+          />
+          <SummaryCard
+            title="High Probability"
+            value="328"
+            iconSrc={chartIcon}
+            altText="Chart Icon"
+          />
+          <SummaryCard
+            title="Leads Contacted"
+            value="856"
+            iconSrc={phoneIcon}
+            altText="Phone Icon"
+          />
+          <SummaryCard
+            title="Converted Leads"
+            value="8"
+            iconSrc={handshakeIcon}
+            altText="Handshake Icon"
+          />
         </div>
 
         {/* Statistik cards */}
