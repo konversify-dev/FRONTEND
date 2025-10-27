@@ -5,6 +5,9 @@ import "./index.css";
 // Pages
 import Login from "./pages/Login.jsx";
 
+// Sales
+import Dashboard from "./pages/Sales/Dashboard.jsx";
+
 function App() {
   return (
     <Router>
@@ -13,7 +16,7 @@ function App() {
         <Route path="/" element={<Login />} />
 
         {/* Sales */}
-
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
