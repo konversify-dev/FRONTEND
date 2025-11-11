@@ -1,73 +1,49 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 export default function CustomDropdown({
   options = [],
-  defaultValue = "Select an option",
+  defaultValue,
   onChange,
-  width = "w-48",
+  width = "w-40",
+  fontSize = "text-sm", // ⬅️ tambahkan prop baru untuk atur ukuran font
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(defaultValue);
-  const dropdownRef = useRef(null);
-
-  // Tutup dropdown saat klik di luar area
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const [selected, setSelected] = useState(defaultValue || options[0]);
+  const [open, setOpen] = useState(false);
 
   const handleSelect = (option) => {
     setSelected(option);
-    setIsOpen(false);
-    if (onChange) onChange(option);
+    setOpen(false);
+    onChange?.(option);
   };
 
   return (
-    <div ref={dropdownRef} className={`relative inline-block text-left ${width}`}>
-      {/* Tombol Utama */}
+    <div className={`relative ${width}`}>
+      {/* Tombol utama */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="
-          inline-flex items-center justify-between
-          w-full px-4 py-2
-          bg-white text-gray-700 font-medium
-          rounded-lg border border-gray-300
-          shadow-sm hover:bg-gray-50
-          focus:outline-none
-          transition-all duration-200
-        "
+        onClick={() => setOpen(!open)}
+        className={`flex justify-between items-center w-full bg-white text-gray-700 px-4 py-2 rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 transition-all focus:outline-none ${fontSize}`}
       >
-        {selected}
+        <span className="truncate">{selected}</span>
         <FiChevronDown
-          className={`ml-2 h-5 w-5 transform transition-transform ${
-            isOpen ? "rotate-180" : ""
+          className={`ml-2 text-gray-500 transition-transform ${
+            open ? "rotate-180" : ""
           }`}
         />
       </button>
 
-      {/* Dropdown Menu */}
-      {isOpen && (
-        <div
-          className="
-            absolute z-10 mt-2 w-full
-            bg-white border border-gray-200
-            rounded-lg shadow-lg
-          "
-        >
+      {/* Daftar opsi */}
+      {open && (
+        <div className={`absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg ${fontSize}`}>
           {options.map((option, index) => (
             <div
               key={index}
               onClick={() => handleSelect(option)}
-              className="
-                px-4 py-2 text-gray-700 hover:bg-gray-200
-                cursor-pointer transition-colors duration-150
-              "
+              className={`px-4 py-2 cursor-pointer ${
+                option === selected
+                  ? "bg-gray-100 text-gray-700"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
             >
               {option}
             </div>
