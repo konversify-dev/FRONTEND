@@ -8,7 +8,7 @@ export default function ReusableTable({ columns = [], data = [] }) {
         <thead className=" text-gray-700 uppercase text-xs">
           <tr>
             {columns.map((col, index) => (
-              <th key={index} className="px-5 py-3 font-semibold text-primary-light whitespace-nowrap">
+              <th key={index} className="px-5 py-3 font-semibold text-sm text-primary-light whitespace-nowrap">
                 {col.header}
               </th>
             ))}
