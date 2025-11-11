@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../layout/ReusableTable.jsx";
 import { FiEye, FiTrash2 } from "react-icons/fi";
 import StatusBadge from "../utils/StatusBadge.jsx";
+import Pagination from "../utils/Pagination.jsx";
 
 export default function TableLeadScoring({ searchQuery, filters }) {
   const columns = [
@@ -32,8 +33,13 @@ export default function TableLeadScoring({ searchQuery, filters }) {
     { id: "LD-01", name: "David Fahrreza", probability: "92%", age: 42, job: "Wirausaha", status: "Pending", lastContact: "10/10/2025" },
     { id: "LD-02", name: "Putri Utami Zahara", probability: "85%", age: 35, job: "PNS", status: "Converted", lastContact: "10/10/2025" },
     { id: "LD-03", name: "Andi Pratama", probability: "60%", age: 23, job: "Freelancer", status: "Failed", lastContact: "09/10/2025" },
+    { id: "LD-04", name: "Budi Santoso", probability: "45%", age: 28, job: "Sales", status: "Contacted", lastContact: "09/10/2025" },
+    { id: "LD-05", name: "Siti Aisyah", probability: "77%", age: 31, job: "PNS", status: "Pending", lastContact: "08/10/2025" },
+    { id: "LD-06", name: "Rizky Hadi", probability: "33%", age: 40, job: "Freelancer", status: "Failed", lastContact: "08/10/2025" },
+    { id: "LD-07", name: "Nanda Prasetyo", probability: "81%", age: 37, job: "Sales", status: "Converted", lastContact: "07/10/2025" },
   ];
 
+  // 🔎 Filtering logic
   const filteredData = allData.filter((item) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -67,5 +73,33 @@ export default function TableLeadScoring({ searchQuery, filters }) {
     );
   });
 
-  return <Table columns={columns} data={filteredData} />;
+  // 📄 Pagination logic
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  // reset ke halaman 1 kalau filter berubah
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, filters]);
+
+  return (
+    <div>
+      <Table columns={columns} data={currentItems} />
+
+      <Pagination
+        currentPage={currentPage}
+        totalItems={filteredData.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={setCurrentPage}
+        onItemsPerPageChange={(value) => {
+          setItemsPerPage(value);
+          setCurrentPage(1);
+        }}
+      />
+    </div>
+  );
 }
