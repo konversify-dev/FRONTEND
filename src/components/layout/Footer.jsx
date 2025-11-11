@@ -1,0 +1,11 @@
+import React from "react";
+
+export default function Footer() {
+  return (
+    <footer className="py-4 mt-4  border-gray-200">
+      <p className="text-center text-gray-500 text-sm font-semibold">
+        © 2025 Conversify all rights reserved
+      </p>
+    </footer>
+  );
+}
