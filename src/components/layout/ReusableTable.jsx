@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Table({ columns = [], data = [] }) {
+export default function ReusableTable({ columns = [], data = [] }) {
   return (
     <div className="overflow-x-auto bg-white rounded-xl shadow-sm shadow-gray-300">
       <table className="min-w-full text-sm text-left border-collapse">
